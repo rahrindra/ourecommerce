@@ -81,6 +81,10 @@ class ProduitController extends Controller
 
         if($form->isValid())
         {
+            if($produit->getImage()->getFile() == null)
+            {
+                $produit->setImage(null);
+            }
             $em->flush();
             $request->getSession()->getFlashBag()->add('notice', 'Produit bien modifiée.');
             return $this->redirectToRoute('admin_admin_produits');
